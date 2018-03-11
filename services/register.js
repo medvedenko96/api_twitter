@@ -3,7 +3,7 @@ const passport = require('passport'),
     User = mongoose.model('User');
 require('./passport');
 
-let responseJSON = function(res, status, content) {
+let responseJSON = (res, status, content) => {
     res.status(status);
     res.json(content);
 };
@@ -23,7 +23,7 @@ function  register (req, res) {
     newUser.about = req.body.about;
     newUser.setPassword(req.body.password);
 
-    newUser.save(function (err) {
+    newUser.save((err) => {
         let token;
         if (err) {
             responseJSON(res, 404, err);
