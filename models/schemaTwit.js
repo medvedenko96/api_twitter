@@ -7,15 +7,22 @@ const twitSchema = new Schema({
         type : String,
         required: true
     },
-    text : {
+    body : {
         type : String,
         required: true
     },
     date: {
         type: Date,
         default: Date.now
+    },
+    tags:[
+        {type: String}
+        ],
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
 
 });
 
-let Twit = mongoose.model('Twit', twitSchema);
+let twit = mongoose.model('twit', twitSchema);

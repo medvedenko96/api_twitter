@@ -1,5 +1,4 @@
-const passport = require('passport'),
-    mongoose = require('mongoose'),
+const mongoose = require('mongoose'),
     User = mongoose.model('User');
 require('./passport');
 
@@ -21,6 +20,7 @@ function  register (req, res) {
     newUser.lastname = req.body.lastname;
     newUser.email = req.body.email;
     newUser.about = req.body.about;
+    newUser.fullname = `${req.body.firstname} ${req.body.lastname}`;
     newUser.setPassword(req.body.password);
 
     newUser.save((err) => {

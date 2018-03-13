@@ -1,6 +1,7 @@
 const crypto = require('crypto'),
     mongoose = require('mongoose'),
-    jwt = require('jsonwebtoken');
+    jwt = require('jsonwebtoken'),
+    moment = require('moment');
 
 const Schema = mongoose.Schema;
 
@@ -13,6 +14,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    fullname: {
+        type: String
+    },
     email : {
         type: String,
         required: true,
@@ -22,7 +26,16 @@ const userSchema = new Schema({
         type: String
     },
     hash: String,
-    salt: String
+    salt: String ,
+    twits:[
+        {type: Schema.Types.ObjectId,
+            ref: 'twit'}
+    ],
+    createdAt: {
+        type: String,
+        default: moment(new Date()).format("MMM DD, YYYY")
+    }
+
 });
 
 
@@ -38,15 +51,18 @@ userSchema.methods.validPassword = function (password) {
 };
 
 userSchema.methods.generateJwt = function () {
-    let expiry = new Date();
-    expiry.setDate(expiry.getDate() + 10);
+
 
     return jwt.sign({
         _id: this._id,
         email: this.email,
-        name: this.name,
-        exp: parseInt(expiry.getTime() / 1000),
-    }, process.env.SECRET);
+        fullname: this.fullname
+    },
+        process.env.SECRET,
+    {
+        algorithm: 'HS384',
+        expiresIn: '10 days'
+    });
 };
 
 

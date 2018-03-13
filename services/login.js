@@ -9,6 +9,7 @@ let responseJSON = (res, status, content) => {
 };
 
 function login (req, res) {
+    console.log(req.body);
     if (!req.body.email || !req.body.password) {
         responseJSON(res, 400, {
             "message": "All fields required."
@@ -30,6 +31,7 @@ function login (req, res) {
             responseJSON(res, 200, {
                 "token": token
             });
+
         } else {
             responseJSON(res, 401, info);
         }
