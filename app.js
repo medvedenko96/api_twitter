@@ -9,7 +9,7 @@ const jwt = require('express-jwt');
 
 const app = express();
 require('./models/db');
-require('./services/passport');
+require('./middleware/passport');
 
 const routes = require('./routes');
 
@@ -27,21 +27,22 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(jwt(
-    {
-        secret: process.env.SECRET,
-        algorithms: ['HS384'] })
+    { secret: process.env.SECRET })
     .unless(
-        {path: ['/register'] && ['/login'] && ['/test'] }
+        {path: ['/api/register', '/api/login', '/api/test']}
         ));
 
 app.use(passport.initialize());
 
-app.use('/', routes);
+app.use('/api', routes);
 
-app.use('/', (req, res, next) => {
+app.use('/ky', (req, res, next) => {
     res.send('Hello MOC')
 });
 
+app.use('/api/test1', (req, res, next) => {
+    res.send('Hello MOC890')
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

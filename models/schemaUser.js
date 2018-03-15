@@ -6,6 +6,11 @@ const crypto = require('crypto'),
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
+    nickname : {
+        type: String,
+        required: true,
+        unique: true
+    },
     firstname: {
         type: String,
         required: true
@@ -13,9 +18,6 @@ const userSchema = new Schema({
     lastname: {
         type: String,
         required: true
-    },
-    fullname: {
-        type: String
     },
     email : {
         type: String,
@@ -27,10 +29,20 @@ const userSchema = new Schema({
     },
     hash: String,
     salt: String ,
-    twits:[
-        {type: Schema.Types.ObjectId,
-            ref: 'twit'}
-    ],
+    twits:[{
+            type: Schema.Types.ObjectId,
+            ref: 'twit'
+    }],
+    followers :
+        [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }] ,
+    following :
+        [{
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+        }] ,
     createdAt: {
         type: String,
         default: moment(new Date()).format("MMM DD, YYYY")
@@ -56,11 +68,10 @@ userSchema.methods.generateJwt = function () {
     return jwt.sign({
         _id: this._id,
         email: this.email,
-        fullname: this.fullname
+        nickname: this.nickname
     },
         process.env.SECRET,
     {
-        algorithm: 'HS384',
         expiresIn: '10 days'
     });
 };

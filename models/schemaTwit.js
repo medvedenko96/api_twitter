@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema,
+    moment = require('moment');
 
 
 const twitSchema = new Schema({
@@ -11,9 +12,9 @@ const twitSchema = new Schema({
         type : String,
         required: true
     },
-    date: {
-        type: Date,
-        default: Date.now
+    createdAt: {
+        type: String,
+        default: moment(new Date()).format("MMM DD, YYYY")
     },
     tags:[
         {type: String}
@@ -25,4 +26,4 @@ const twitSchema = new Schema({
 
 });
 
-let twit = mongoose.model('twit', twitSchema);
+let Twit = mongoose.model('Twit', twitSchema);
