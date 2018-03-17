@@ -40,9 +40,6 @@ app.use('/ky', (req, res, next) => {
     res.send('Hello MOC')
 });
 
-app.use('/api/test1', (req, res, next) => {
-    res.send('Hello MOC890')
-});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
