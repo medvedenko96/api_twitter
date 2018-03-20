@@ -44,27 +44,6 @@ function  addNewTwit  (req, res)  {
             throw new  Error
         }
     });
-
-  /*  User.findByIdAndUpdate(user._id,
-        {$push: {twits: twit_id}},
-        {safe: true, upsert: true},
-        function(err, doc) {
-            if(err){
-                console.log(err);
-            }else{
-                //do stuff
-            }
-        }
-    );*/
-
-    /*User.findOne({_id : user._id}, function (err, user) {
-        if (err) {throw new Error}
-        console.log(user.twits);
-    });*/
-
-
-
-
 }
 
 module.exports = addNewTwit;
