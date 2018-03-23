@@ -16,9 +16,6 @@ const twitSchema = new Schema({
         type: String,
         default: moment(new Date()).format("MMM DD, YYYY")
     },
-    tags:[
-        {type: String}
-        ],
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
