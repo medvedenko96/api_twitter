@@ -100,7 +100,6 @@ module.exports.readAll = function (req, res) {
 };
 
 module.exports.update = function (req, res) {
-    console.log("=======");
     let user = verifyToken(req.headers.authorization);
 
     if (req.params.id === undefined) {
