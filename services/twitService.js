@@ -67,7 +67,7 @@ module.exports.readAll = function (req, res) {
 };
 
 module.exports.update = function (req, res) {
-    let user = verifyToken(req.headers.authorization); ///////////////////////////////////////////////////
+    let user = verifyToken(req.headers.authorization);
 
     if (req.params.id === undefined) {
         responseJSON(res, 400, {

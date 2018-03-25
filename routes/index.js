@@ -6,7 +6,9 @@ const profile = require('../services/profileService');
 const twit = require('../services/twitService');
 const following = require('../services/followingService');
 const show = require('../services/showService');
+const comment = require('../services/commentService');
 const like = require('../services/likeService');
+
 
 
 //authentication
@@ -36,12 +38,23 @@ router.get('/show/following/:nickname', show.following);
 router.get('/show/my-twits/:nickname', show.myTwits);
 router.get('/show/twits/', show.twitsMyFollowing);
 
-//like
+//Comment
+router.post('/twit/:id/comment', comment.create);
+router.get('/twit/comment/:id', comment.readOne);
+router.get('/twit/:id/comment/', comment.readAll);
 
+
+router.put('/comment/:id', comment.update);
+
+router.delete('/comment/:id', comment.delete);
+
+//router.get('twit/:id/comment/', comment.readTwitAndComment);
+
+//like twit
 router.get('/like/:id', like.create);
-router.get('/like/:id', like.delete);
+router.delete('/like/:id', like.delete);
 
-
+//like comment
 
 
 

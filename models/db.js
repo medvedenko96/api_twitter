@@ -39,3 +39,5 @@ process.on('SIGINT', function () {
 
 require('./schemaUser');
 require('./schemaTwit');
+require('./schemaComment');
+require('./schemaLike');

@@ -3,11 +3,7 @@ const Schema = mongoose.Schema,
     moment = require('moment');
 
 
-const twitSchema = new Schema({
-    title : {
-        type : String,
-        required: true
-    },
+const commentSchema = new Schema({
     body : {
         type : String,
         required: true
@@ -16,11 +12,6 @@ const twitSchema = new Schema({
         type: String,
         default: moment(new Date()).format("MMM DD, YYYY")
     },
-    comment :
-        [{
-            type: Schema.Types.ObjectId,
-            ref: 'Comment'
-        }],
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User'
@@ -28,4 +19,4 @@ const twitSchema = new Schema({
 
 });
 
-let Twit = mongoose.model('Twit', twitSchema);
+let Comment = mongoose.model('Comment', commentSchema);
